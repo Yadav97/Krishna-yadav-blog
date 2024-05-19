@@ -6,6 +6,18 @@ const bodyparser = require("body-parser");
 const blogpost =require("./models/blogpost")
 const fileupload = require("express-fileupload")
 
+
+// importin all controllers
+const newpost = require("./controllers/newpost")
+const homepage = require("./controllers/home")
+
+
+
+
+// imports the middlewares 
+const validateformmiddleware = require("./middlewares/validateformmiddleware")
+
+
 const app = express()
 
 
@@ -19,17 +31,22 @@ app.set("view engine","ejs")
 app.use(fileupload())
 
 
-// custome middlewares
+// // custome middlewares -- see middleware folder
 
-const validateFormMiddleware = (req,res,next)=>{
-    if(req.files === null || req.body.title === null || req.body.body === null || req.body.category === null || req.files.image === null)
-        {
-            return res.redirect("/post/new");
-        }
-    next();
-}
+// const validateFormMiddleware = (req,res,next)=>{
+//     if(req.files === null || req.body.title === null || req.body.body === null || req.body.category === null || req.files.image === null)
+//         {
+//             return res.redirect("/post/new");
+//         }
+//     next();
+// }
 
-app.use("/posts/store",validateFormMiddleware);
+app.use("/posts/store",validateformmiddleware);// custome middlewares
+
+
+
+
+
 
 
 
@@ -42,16 +59,10 @@ app.use("/posts/store",validateFormMiddleware);
 // })
 
 // now display the all the blogposts on the homepage
-app.get("/", async (req,res)=>{
-    console.log("wait for list loaded from Db")
-    const dta = await blogpost.find()
-    // res.render("index")
-    // const dta = [{title:"this is the title",body:"this is the body"},{title:"2ns title",bosy:"2nd body"}   ]
-    console.log(dta)
-    res.render("index",{dta:dta});
+app.get("/",homepage );
 
-})
 
+// ----------------no need to make controllers for that cause no big codebase
 app.get("/about",(req,res)=>{
     res.render("about")
 })
@@ -65,10 +76,15 @@ res.render("signup")
 app.get("/signin",(req,res)=>{
     res.render("signin")
 })
+// ----------------------------------------------------------------------
 
-app.get("/post/new",(req,res)=>{
-    res.render("createpost")
-})
+
+// app.get("/post/new",(req,res)=>{
+//     res.render("createpost")
+// })
+app.get("/post/new",newpost);
+
+
 
 // single post seeing
 
@@ -87,7 +103,7 @@ app.get("/post/:id",async (req,res)=>{
 //     res.end("data is stored")
 // })
 
-// store the from data or post in db
+// store the form data or post in db
 
 app.post("/posts/store",(req,res)=>{
     let uploadimg = req.files.image;
@@ -103,7 +119,7 @@ app.post("/posts/store",(req,res)=>{
 })
 
 
-// creating our own custom middleware
+// creating our own custom middlewares demo
 
 // const customeMiddle = (req,res,next)=>{
 //     console.log("custom middleware is called");
