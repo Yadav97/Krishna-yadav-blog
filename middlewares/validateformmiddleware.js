@@ -7,3 +7,5 @@ const validateFormMiddleware = (req,res,next)=>{
         }
     next();
 }
+
+module.exports = validateFormMiddleware
