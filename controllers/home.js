@@ -7,6 +7,9 @@ module.exports  = async (req,res)=>{
     // res.render("index")
     // const dta = [{title:"this is the title",body:"this is the body"},{title:"2ns title",bosy:"2nd body"}   ]
     console.log(dta)
+    console.log("req.session ---> ", req.session.userid);
+    console.log("req.session ---> ", req.session);
+
     res.render("home",{dta:dta});
 
 }

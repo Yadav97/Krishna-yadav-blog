@@ -5,11 +5,14 @@ const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const blogpost =require("./models/blogpost")
 const fileupload = require("express-fileupload")
+const expressSession = require("express-session");
 
 
 // importin all controllers
 const newpost = require("./controllers/newpost")
 const homepage = require("./controllers/home")
+const storenewuser = require("./controllers/storenewuser")
+const userlogincontroller = require("./controllers/signinuser")
 
 
 
@@ -24,6 +27,9 @@ const app = express()
 app.use(express.static("public"));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));
+app.use(expressSession({
+    secret:"keyboard is the cat"
+}))
 
 
 app.set("view engine","ejs")
@@ -68,14 +74,29 @@ app.get("/about",(req,res)=>{
 })
 
 
-app.get("/signup",(req,res)=>{
+app.get("/signup",redirectifauthenticated,(req,res)=>{
 res.render("signup")
 })
+
+
+// when user clicks on register button in signup page
+app.post("/user/register",redirectifauthenticated,storenewuser)
+
+
+
+
 
 
 app.get("/signin",(req,res)=>{
     res.render("signin")
 })
+
+
+app.post("/user/signin",userlogincontroller);
+
+
+
+
 // ----------------------------------------------------------------------
 
 

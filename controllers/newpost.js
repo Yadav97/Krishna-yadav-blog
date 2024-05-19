@@ -1,3 +1,11 @@
 module.exports = (req,res)=>{
-    res.render("createpost")
+    if(req.session.userid)
+        {
+
+            res.render("createpost")
+        }
+        else
+        {
+            res.redirect("/signin");
+        }
 }
