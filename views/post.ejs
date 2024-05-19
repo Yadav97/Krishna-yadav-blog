@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-include("layout/head");%>
+<body>
+    <%-include("layout/header");%>
+
+    
+    
+    <div class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-md px-4 md:px-8">
+          <!-- <div style="width:50%;height:20%;background-image: url('<%= singlepost.imagepath %>');"></div> -->
+          <!-- <img src="<%= singlepost.imagepath %>" alt="pata nhi" width="70%" height="5%"> -->
+         
+             
+          <h1 class="mb-4 text-center text-2xl font-bold text-gray-800 sm:text-3xl md:mb-6">
+            <%= singlepost.title %>
+        </h1>
+
+
+          <section class=" body-font">
+            <div class="container px-5 py-24 mx-auto flex flex-wrap">
+              <div class="lg:w-2/3 mx-auto">
+                <div class="flex flex-wrap w-full bg-gray-100 py-32 px-10 relative mb-4">
+                  <img alt="gallery" class="w-full object-cover h-full object-center block  absolute inset-0" src="<%= singlepost.imagepath %>">
+                  <div class="text-center relative z-10 w-full">
+                   
+                    
+                    
+                      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                  
+                  
+                  
+              </div>
+            </div>
+          </section>
+         
+         
+         
+         
+         
+         
+
+
+        <!-- <div class="flex flex-wrap w-full bg-gray-100 py-32 px-10 relative mb-4">
+          <img alt="galler" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="">
+        <div class="text-center relative z-10 w-full">
+       -->
+          <br>
+          <p class="mb-6 text-gray-500 sm:text-lg md:mb-8">
+            <%= singlepost.body %><
+          </p>
+          <div>
+            <span class="block text-indigo-500"><%= singlepost.username %></span>
+            <span class="block text-sm text-gray-400"><%= singlepost.dateposted.toDateString() %></span>
+          </div>
+      
+      
+      
+        </div>
+      </div>
+</body
+</html>
